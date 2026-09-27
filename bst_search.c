@@ -7,7 +7,6 @@ struct node
     struct node *left;
     struct node *right;
 };
-
 struct node* createNode(int key)
 {
     struct node *newNode;
@@ -20,7 +19,6 @@ struct node* createNode(int key)
 
     return newNode;
 }
-
 struct node* insert(struct node *root, int key)
 {
     if (root == NULL)
@@ -98,13 +96,39 @@ int linearSearch(int arr[], int n, int key, int *comparisons)
 
 int main()
 {
-    int isbn[] = {45, 20, 60, 10, 30, 50, 70, 25, 55};
-    int n = 9;
-
-    int searchKeys[] = {25, 55, 90};
-    int i;
+    FILE *input;
 
     struct node *root = NULL;
+
+    int n, i;
+    int *isbn;
+
+    int searchCount;
+    int *searchKeys;
+
+    int bstComparisons;
+    int linearComparisons;
+    input = fopen("input.txt", "r");
+
+    if (input == NULL)
+    {
+        printf("Error: Could not open input.txt\n");
+        return 1;
+    }
+    fscanf(input, "%d", &n);
+    isbn = (int*)malloc(n * sizeof(int));
+    for (i = 0; i < n; i++)
+    {
+        fscanf(input, "%d", &isbn[i]);
+    }
+    fscanf(input, "%d", &searchCount);
+    searchKeys = (int*)malloc(searchCount * sizeof(int));
+    for (i = 0; i < searchCount; i++)
+    {
+        fscanf(input, "%d", &searchKeys[i]);
+    }
+
+    fclose(input);
     for (i = 0; i < n; i++)
     {
         root = insert(root, isbn[i]);
@@ -118,12 +142,14 @@ int main()
     printf("\n\nPOSTORDER TRAVERSAL:\n");
     postorder(root);
     printf("\n\nSEARCH COMPARISON:\n");
+    printf("------------------------------------------\n");
     printf("Key\tBST Comparisons\tLinear Comparisons\n");
+    printf("------------------------------------------\n");
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < searchCount; i++)
     {
-        int bstComparisons = 0;
-        int linearComparisons = 0;
+        bstComparisons = 0;
+        linearComparisons = 0;
 
         bstSearch(root, searchKeys[i], &bstComparisons);
         linearSearch(isbn, n, searchKeys[i], &linearComparisons);
@@ -133,6 +159,10 @@ int main()
                bstComparisons,
                linearComparisons);
     }
+
+    printf("------------------------------------------\n");
+    free(isbn);
+    free(searchKeys);
 
     return 0;
 }
