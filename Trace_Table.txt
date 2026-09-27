@@ -1,0 +1,70 @@
+TRACE TABLE BST INSERTION
+| Step | ISBN Inserted | Comparisons / Path          | Position    |
+| ---: | ------------: | --------------------------- | ----------- |
+|    1 |            45 | —                           | Root        |
+|    2 |            20 | 20 < 45                     | Left of 45  |
+|    3 |            60 | 60 > 45                     | Right of 45 |
+|    4 |            10 | 10 < 45 → 10 < 20           | Left of 20  |
+|    5 |            30 | 30 < 45 → 30 > 20           | Right of 20 |
+|    6 |            50 | 50 > 45 → 50 < 60           | Left of 60  |
+|    7 |            70 | 70 > 45 → 70 > 60           | Right of 60 |
+|    8 |            25 | 25 < 45 → 25 > 20 → 25 < 30 | Left of 30  |
+|    9 |            55 | 55 > 45 → 55 < 60 → 55 > 50 | Right of 50 |
+
+
+RESULTING BST
+             45
+           /    \
+         20      60
+        /  \    /  \
+      10   30  50   70
+           /     \
+          25      55
+
+BST SEARCH TRACE 
+Search for 25
+| Step | Current Node | Comparison | Next      |
+| ---: | -----------: | ---------- | --------- |
+|    1 |           45 | 25 < 45    | Left      |
+|    2 |           20 | 25 > 20    | Right     |
+|    3 |           30 | 25 < 30    | Left      |
+|    4 |           25 | 25 = 25    | **Found** |
+Total comparisons = 4
+
+Search for 55
+| Step | Current Node | Comparison | Next      |
+| ---: | -----------: | ---------- | --------- |
+|    1 |           45 | 55 > 45    | Right     |
+|    2 |           60 | 55 < 60    | Left      |
+|    3 |           50 | 55 > 50    | Right     |
+|    4 |           55 | 55 = 55    | **Found** |
+Total comparisons = 4
+
+Search for 90
+| Step | Current Node | Comparison   | Next          |
+| ---: | -----------: | ------------ | ------------- |
+|    1 |           45 | 90 > 45      | Right         |
+|    2 |           60 | 90 > 60      | Right         |
+|    3 |           70 | 90 > 70      | Right → NULL  |
+|    — |         NULL | 90 not found | **Not Found** |
+Total comparisons = 3
+
+Original ISBN array:
+
+45  20  60  10  30  50  70  25  55
+
+| Search Key | Comparison Sequence                | Result    | Comparisons |
+| ---------: | ---------------------------------- | --------- | ----------: |
+|         25 | 45, 20, 60, 10, 30, 50, 70, 25     | Found     |           8 |
+|         55 | 45, 20, 60, 10, 30, 50, 70, 25, 55 | Found     |           9 |
+|         90 | 45, 20, 60, 10, 30, 50, 70, 25, 55 | Not Found |           9 |
+
+
+Final Comparison Table
+| Key | BST Search | Linear Search |
+| --: | ---------: | ------------: |
+|  25 |          4 |             8 |
+|  55 |          4 |             9 |
+|  90 |          3 |             9 |
+
+
