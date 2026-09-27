@@ -1,0 +1,54 @@
+1. BST Insertion
+
+The ISBNs are inserted one by one into the Binary Search Tree.
+
+Average-case time complexity: O(n log n)
+Worst-case time complexity: O(n²)
+Space complexity: O(n)
+
+The worst case occurs when the BST becomes highly unbalanced.
+
+2. BST Search
+
+For the given BST, searching follows only one path from the root.
+
+Best case: O(1) — key is at the root.
+Average case: O(log n) — when the tree is reasonably balanced.
+Worst case: O(n) — when the tree becomes skewed.
+Space complexity: O(1) for the iterative search used in the program.
+
+For this dataset, the BST has height 3, so the search paths are relatively short.
+
+3. Linear Search
+
+Linear search checks the ISBNs sequentially from the beginning.
+
+Best case: O(1) — key is the first element.
+Average case: O(n)
+Worst case: O(n) — key is the last element or is not present.
+Space complexity: O(1)
+
+4.Comparison
+| Operation    | BST Search | Linear Search |
+| ------------ | ---------- | ------------- |
+| Best Case    | O(1)       | O(1)          |
+| Average Case | O(log n)   | O(n)          |
+| Worst Case   | O(n)       | O(n)          |
+| Space        | O(1)       | O(1)          |
+
+5.Observed Results
+For n = 9:
+| Search Key | BST Comparisons | Linear Comparisons |
+| ---------: | --------------: | -----------------: |
+|         25 |               4 |                  8 |
+|         55 |               4 |                  9 |
+|         90 |               3 |                  9 |
+
+The experimental results show that the BST required fewer comparisons for all three search keys.
+This is because the BST uses the ordering of the keys to eliminate unnecessary parts of the tree during searching.
+
+Conclusion
+
+For the given dataset, the BST provides better observed search performance than linear search.
+Its performance is particularly useful when the tree remains reasonably balanced.
+However, an ordinary BST can become skewed, causing its search complexity to degrade to O(n).
